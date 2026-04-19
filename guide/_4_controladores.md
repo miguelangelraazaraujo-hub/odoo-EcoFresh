@@ -20,6 +20,23 @@ La novedad frente a pasos anteriores es que el XML ya no describe pantallas de b
 
 ---
 
+## 🗁 Vista general de ficheros
+
+```
+addons/gym_addon/
+├── 🟡 __init__.py
+├── 🟡 __manifest__.py
+├── controllers/
+│   ├── 🟢 __init__.py
+│   └── 🟢 portal.py
+└── templates/
+    └── 🟢 portal_schedule.xml
+```
+
+🟢 Nuevo &nbsp;&nbsp; 🟡 Modificado &nbsp;&nbsp; 🔴 Eliminado
+
+---
+
 ## 🗂️ Archivos afectados
 
 ### `addons/gym_addon/controllers/__init__.py` — 🟢 NUEVO

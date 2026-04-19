@@ -30,6 +30,26 @@ gym_activity (1) ──────────── (N) gym_schedule
 
 ---
 
+## 🗁 Vista general de ficheros
+
+```
+addons/gym_addon/
+├── 🟡 __manifest__.py
+├── models/
+│   ├── 🟡 __init__.py
+│   ├── 🟡 gym_activity.py
+│   └── 🟢 gym_schedule.py
+├── security/
+│   └── 🟡 ir.model.access.csv
+└── views/
+    ├── 🟡 gym_activity_views.xml
+    └── 🟢 gym_schedule_views.xml
+```
+
+🟢 Nuevo &nbsp;&nbsp; 🟡 Modificado &nbsp;&nbsp; 🔴 Eliminado
+
+---
+
 ## 🗂️ Archivos afectados
 
 ### `addons/gym_addon/models/gym_schedule.py` — 🟢 NUEVO

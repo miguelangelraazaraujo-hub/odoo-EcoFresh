@@ -14,6 +14,29 @@ Al terminar este commit, si arrancas el contenedor y activas el módulo, ya tien
 
 ---
 
+## 🗁 Vista general de ficheros
+
+```
+odoo_intro/
+├── 🟢 .gitignore
+├── 🟢 docker-compose.yml
+└── addons/
+    └── gym_addon/
+        ├── 🟢 __init__.py
+        ├── 🟢 __manifest__.py
+        ├── models/
+        │   ├── 🟢 __init__.py
+        │   └── 🟢 gym_activity.py
+        ├── security/
+        │   └── 🟢 ir.model.access.csv
+        └── views/
+            └── 🟢 gym_activity_views.xml
+```
+
+🟢 Nuevo &nbsp;&nbsp; 🟡 Modificado &nbsp;&nbsp; 🔴 Eliminado
+
+---
+
 ## 🗂️ Archivos afectados
 
 ### `docker-compose.yml` — 🟢 NUEVO

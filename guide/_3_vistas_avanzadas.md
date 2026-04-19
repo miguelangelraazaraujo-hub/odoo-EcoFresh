@@ -14,6 +14,20 @@ Además, la vista Kanban introduce algo nuevo en la sintaxis: **plantillas con `
 
 ---
 
+## 🗁 Vista general de ficheros
+
+```
+addons/gym_addon/
+├── 🟡 __manifest__.py
+└── views/
+    ├── 🟡 gym_activity_views.xml
+    └── 🟡 gym_schedule_views.xml
+```
+
+🟢 Nuevo &nbsp;&nbsp; 🟡 Modificado &nbsp;&nbsp; 🔴 Eliminado
+
+---
+
 ## 🗂️ Archivos afectados
 
 ### `addons/gym_addon/views/gym_activity_views.xml` — 🟡 MODIFICADO
