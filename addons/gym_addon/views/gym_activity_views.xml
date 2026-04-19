@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <!-- Vista lista -->
     <record id="gym_activity_view_tree" model="ir.ui.view">
         <field name="name">gym.activity.tree</field>
         <field name="model">gym.activity</field>
@@ -15,7 +14,6 @@
         </field>
     </record>
 
-    <!-- Vista formulario -->
     <record id="gym_activity_view_form" model="ir.ui.view">
         <field name="name">gym.activity.form</field>
         <field name="model">gym.activity</field>
@@ -31,19 +29,30 @@
                     <group string="Descripción">
                         <field name="description" nolabel="1" colspan="2"/>
                     </group>
+                    <!-- NUEVO en paso 2: lista de horarios embebida -->
+                    <notebook>
+                        <page string="Horarios">
+                            <field name="schedule_ids">
+                                <tree editable="bottom">
+                                    <field name="day_of_week"/>
+                                    <field name="time_start" widget="float_time"/>
+                                    <field name="time_end" widget="float_time"/>
+                                    <field name="instructor"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
                 </sheet>
             </form>
         </field>
     </record>
 
-    <!-- Acción de ventana -->
     <record id="gym_activity_action" model="ir.actions.act_window">
         <field name="name">Actividades</field>
         <field name="res_model">gym.activity</field>
         <field name="view_mode">tree,form</field>
     </record>
 
-    <!-- Menús -->
     <menuitem id="gym_menu_root"
               name="Gimnasio"
               sequence="10"/>

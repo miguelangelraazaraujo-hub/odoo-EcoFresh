@@ -24,3 +24,11 @@ class GymActivity(models.Model):
         string='Activo',
         default=True,
     )
+
+    # ── NUEVO en paso 2 ──────────────────────────────────────────
+    # Relación inversa: desde la actividad vemos todos sus horarios
+    schedule_ids = fields.One2many(
+        comodel_name='gym.schedule',
+        inverse_name='activity_id',
+        string='Horarios',
+    )
