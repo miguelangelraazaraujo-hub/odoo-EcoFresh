@@ -52,40 +52,40 @@ addons/gym_addon/
 ### `addons/gym_addon/controllers/portal.py` — 🟢 NUEVO
 
 ```diff
-  1 + from odoo import http
-  2 + from odoo.http import request
-  3 + 
-  4 + 
-  5 + class GymPortalController(http.Controller):
-  6 + 
-  7 +     @http.route('/gym/schedule', type='http', auth='public', website=True)
-  8 +     def public_schedule(self):
-  8 +         """
-  9 +         auth='public' → no requiere login.
- 10 +         """
- 11 +         # Recuperamos todos los horarios ordenados por día y hora
- 12 +         schedules = request.env['gym.schedule'].sudo().search(
- 13 +             [],
- 14 +             order='day_of_week, time_start',
- 15 +         )
- 16 + 
- 17 +         # Agrupamos por día para facilitar el renderizado
- 18 +         days = {
- 19 +             '0': 'Lunes', '1': 'Martes', '2': 'Miércoles',
- 20 +             '3': 'Jueves', '4': 'Viernes', '5': 'Sábado', '6': 'Domingo',
- 21 +         }
- 22 +         schedule_by_day = {}
- 23 +         for slot in schedules:
- 24 +             day_label = days.get(slot.day_of_week, slot.day_of_week)
- 25 +             schedule_by_day.setdefault(day_label, []).append(slot)
- 26 + 
- 27 +         return request.render(
- 28 +             'gym_addon.portal_schedule_public',
- 29 +             {
- 30 +                 'schedule_by_day': schedule_by_day,
- 31 +                 'days_order': list(days.values()),
- 32 +             },
- 33 +         )
+from odoo import http
+from odoo.http import request
+
+
+class GymPortalController(http.Controller):
+
+    @http.route('/gym/schedule', type='http', auth='public', website=True)
+    def public_schedule(self):
+        """
+        auth='public' → no requiere login.
+        """
+        # Recuperamos todos los horarios ordenados por día y hora
+        schedules = request.env['gym.schedule'].sudo().search(
+            [],
+            order='day_of_week, time_start',
+        )
+
+        # Agrupamos por día para facilitar el renderizado
+        days = {
+            '0': 'Lunes', '1': 'Martes', '2': 'Miércoles',
+            '3': 'Jueves', '4': 'Viernes', '5': 'Sábado', '6': 'Domingo',
+        }
+        schedule_by_day = {}
+        for slot in schedules:
+            day_label = days.get(slot.day_of_week, slot.day_of_week)
+            schedule_by_day.setdefault(day_label, []).append(slot)
+
+        return request.render(
+            'gym_addon.portal_schedule_public',
+            {
+                'schedule_by_day': schedule_by_day,
+                'days_order': list(days.values()),
+            },
+        )
 ```
 
 > Desglosando las piezas clave:

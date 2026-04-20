@@ -42,27 +42,27 @@ odoo_intro/
 ### `docker-compose.yml` — 🟢 NUEVO
 
 ```diff
-  1 + services:
-  2 +   web:
-  3 +     image: odoo:17.0
-  4 +     command: odoo --log-level=debug --country=es
-  5 +     depends_on:
-  6 +       - db
-  7 +     ports:
-  8 +       - "80:8069"
-  9 +     volumes:
- 10 +       - ./addons:/mnt/extra-addons
- 11 +     environment:
- 12 +       - HOST=db
- 13 +       - USER=odoo
- 14 +       - PASSWORD=odoo
- 15 + 
- 16 +   db:
- 17 +     image: postgres:15
- 18 +     environment:
- 19 +       - POSTGRES_DB=postgres
- 20 +       - POSTGRES_PASSWORD=odoo
- 21 +       - POSTGRES_USER=odoo
+services:
+  web:
+    image: odoo:17.0
+    command: odoo --log-level=debug --country=es
+    depends_on:
+      - db
+    ports:
+      - "80:8069"
+    volumes:
+      - ./addons:/mnt/extra-addons
+    environment:
+      - HOST=db
+      - USER=odoo
+      - PASSWORD=odoo
+
+  db:
+    image: postgres:15
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_PASSWORD=odoo
+      - POSTGRES_USER=odoo
 ```
 
 > Arranca dos contenedores: uno con Odoo 17 (el servidor web en el puerto 80) y otro con PostgreSQL 15 (la base de datos). La carpeta `./addons` del proyecto se monta directamente en el contenedor, así que cualquier cambio en el código se refleja sin reconstruir la imagen.
@@ -72,7 +72,7 @@ odoo_intro/
 ### `.gitignore` — 🟢 NUEVO
 
 ```diff
-  1 + */**/__pycache__
+*/**/__pycache__
 ```
 
 > Ignora las carpetas `__pycache__` que Python genera automáticamente al compilar. No tiene sentido commitear bytecode generado.
@@ -82,22 +82,22 @@ odoo_intro/
 ### `addons/gym_addon/__manifest__.py` — 🟢 NUEVO
 
 ```diff
-  1 + {
-  2 +     'name': 'Gym Addon',
-  3 +     'version': '17.0.1.0.0',
-  4 +     'summary': 'Gestión de gimnasio',
-  5 +     'description': 'Módulo para la gestión de actividades y abonados de un gimnasio.',
-  6 +     'category': 'Services',
-  7 +     'author': 'Formación Odoo',
-  8 +     'depends': ['base'],
-  9 +     'data': [
- 10 +         'security/ir.model.access.csv',
- 11 +         'views/gym_activity_views.xml',
- 12 +     ],
- 13 +     'installable': True,
- 14 +     'application': True,
- 15 +     'license': 'LGPL-3',
- 16 + }
+{
+    'name': 'Gym Addon',
+    'version': '17.0.1.0.0',
+    'summary': 'Gestión de gimnasio',
+    'description': 'Módulo para la gestión de actividades y abonados de un gimnasio.',
+    'category': 'Services',
+    'author': 'Formación Odoo',
+    'depends': ['base'],
+    'data': [
+        'security/ir.model.access.csv',
+        'views/gym_activity_views.xml',
+    ],
+    'installable': True,
+    'application': True,
+    'license': 'LGPL-3',
+}
 ```
 
 > Es el `package.json` del addon: le dice a Odoo cómo se llama el módulo, de qué otros módulos depende (`base` es el núcleo mínimo) y qué archivos de datos/vistas debe cargar al instalar. Si este archivo no existe, Odoo no reconoce la carpeta como módulo.
@@ -107,7 +107,7 @@ odoo_intro/
 ### `addons/gym_addon/__init__.py` — 🟢 NUEVO
 
 ```diff
-  1 + from . import models
+from . import models
 ```
 
 > En Python, para que una carpeta sea un "paquete importable", necesita un `__init__.py`. Este le dice al intérprete: *"cuando alguien importe este paquete, carga también la subcarpeta `models`"*. Equivalente a un `index.js` en Node.
@@ -117,7 +117,7 @@ odoo_intro/
 ### `addons/gym_addon/models/__init__.py` — 🟢 NUEVO
 
 ```diff
-  1 + from . import gym_activity
+from . import gym_activity
 ```
 
 > Mismo patrón: hace que la carpeta `models` sea un paquete Python y carga el archivo `gym_activity.py` al arrancar el addon.
@@ -127,32 +127,32 @@ odoo_intro/
 ### `addons/gym_addon/models/gym_activity.py` — 🟢 NUEVO
 
 ```diff
-  1 + from odoo import models, fields
-  2 + 
-  3 + 
-  4 + class GymActivity(models.Model):
-  5 +     _name = 'gym.activity'
-  6 +     _description = 'Actividad del gimnasio'
-  7 + 
-  8 +     name = fields.Char(
-  9 +         string='Nombre',
-  10 +         required=True,
-  11 +     )
-  12 +     description = fields.Text(
-  13 +         string='Descripción',
-  14 +     )
-  15 +     max_capacity = fields.Integer(
-  16 +         string='Capacidad máxima',
-  17 +         default=20,
-  18 +     )
-  19 +     duration = fields.Float(
-  20 +         string='Duración (horas)',
-  21 +         default=1.0,
-  22 +     )
-  23 +     active = fields.Boolean(
-  24 +         string='Activo',
-  25 +         default=True,
-  26 +     )
+from odoo import models, fields
+
+
+class GymActivity(models.Model):
+    _name = 'gym.activity'
+    _description = 'Actividad del gimnasio'
+
+    name = fields.Char(
+        string='Nombre',
+        required=True,
+    )
+    description = fields.Text(
+        string='Descripción',
+    )
+    max_capacity = fields.Integer(
+        string='Capacidad máxima',
+        default=20,
+    )
+    duration = fields.Float(
+        string='Duración (horas)',
+        default=1.0,
+    )
+    active = fields.Boolean(
+        string='Activo',
+        default=True,
+    )
 ```
 
 > Aquí está el corazón del commit. Esta clase Python equivale a una tabla en base de datos. Cada `fields.Char`, `fields.Integer`, etc. se convierte en una columna SQL. Odoo genera automáticamente el `CREATE TABLE` correspondiente sin que escribamos SQL. El atributo `_name = 'gym.activity'` es el identificador técnico que usarán las vistas XML para referirse a este modelo.
@@ -170,8 +170,8 @@ odoo_intro/
 ### `addons/gym_addon/security/ir.model.access.csv` — 🟢 NUEVO
 
 ```diff
-  1 + id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-  2 + access_gym_activity,access.gym.activity,model_gym_activity,base.group_user,1,1,1,1
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_gym_activity,access.gym.activity,model_gym_activity,base.group_user,1,1,1,1
 ```
 
 > Sin este archivo, Odoo bloquea el acceso al modelo aunque exista. Cada fila define una regla de acceso: qué grupo de usuarios tiene permiso de lectura (`perm_read`), escritura, creación y borrado. Aquí se da acceso total (`1,1,1,1`) a todos los usuarios normales (`base.group_user`).
@@ -181,63 +181,63 @@ odoo_intro/
 ### `addons/gym_addon/views/gym_activity_views.xml` — 🟢 NUEVO
 
 ```diff
-  1 + <?xml version="1.0" encoding="utf-8"?>
-  2 + <odoo>
-  3 + 
-  4 +     <!-- Vista lista -->
-  5 +     <record id="gym_activity_view_tree" model="ir.ui.view">
-  6 +         <field name="name">gym.activity.tree</field>
-  7 +         <field name="model">gym.activity</field>
-  8 +         <field name="arch" type="xml">
-  9 +             <tree>
- 10 +                 <field name="name"/>
- 11 +                 <field name="duration"/>
- 12 +                 <field name="max_capacity"/>
- 13 +                 <field name="active"/>
- 14 +             </tree>
- 15 +         </field>
- 16 +     </record>
- 17 + 
- 18 +     <!-- Vista formulario -->
- 19 +     <record id="gym_activity_view_form" model="ir.ui.view">
- 20 +         <field name="name">gym.activity.form</field>
- 21 +         <field name="model">gym.activity</field>
- 22 +         <field name="arch" type="xml">
- 23 +             <form>
- 24 +                 <sheet>
- 25 +                     <group>
- 26 +                         <field name="name"/>
- 27 +                         <field name="duration"/>
- 28 +                         <field name="max_capacity"/>
- 29 +                         <field name="active"/>
- 30 +                     </group>
- 31 +                     <group string="Descripción">
- 32 +                         <field name="description" nolabel="1" colspan="2"/>
- 33 +                     </group>
- 34 +                 </sheet>
- 35 +             </form>
- 36 +         </field>
- 37 +     </record>
- 38 + 
- 39 +     <!-- Acción de ventana -->
- 40 +     <record id="gym_activity_action" model="ir.actions.act_window">
- 41 +         <field name="name">Actividades</field>
- 42 +         <field name="res_model">gym.activity</field>
- 43 +         <field name="view_mode">tree,form</field>
- 44 +     </record>
- 45 + 
- 46 +     <!-- Menús -->
- 47 +     <menuitem id="gym_menu_root"
- 48 +               name="Gimnasio"
- 49 +               sequence="10"/>
- 50 + 
- 51 +     <menuitem id="gym_menu_activities"
- 52 +               name="Actividades"
- 53 +               parent="gym_menu_root"
- 54 +               action="gym_activity_action"
- 55 +               sequence="10"/>
- 56 + 
- 57 + </odoo>
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Vista lista -->
+    <record id="gym_activity_view_tree" model="ir.ui.view">
+        <field name="name">gym.activity.tree</field>
+        <field name="model">gym.activity</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="duration"/>
+                <field name="max_capacity"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Vista formulario -->
+    <record id="gym_activity_view_form" model="ir.ui.view">
+        <field name="name">gym.activity.form</field>
+        <field name="model">gym.activity</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="duration"/>
+                        <field name="max_capacity"/>
+                        <field name="active"/>
+                    </group>
+                    <group string="Descripción">
+                        <field name="description" nolabel="1" colspan="2"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Acción de ventana -->
+    <record id="gym_activity_action" model="ir.actions.act_window">
+        <field name="name">Actividades</field>
+        <field name="res_model">gym.activity</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menús -->
+    <menuitem id="gym_menu_root"
+              name="Gimnasio"
+              sequence="10"/>
+
+    <menuitem id="gym_menu_activities"
+              name="Actividades"
+              parent="gym_menu_root"
+              action="gym_activity_action"
+              sequence="10"/>
+ 
+</odoo>
 ```
 
 > El XML de vistas es donde más se nota la filosofía de Odoo: describes *qué quieres mostrar*, no *cómo dibujarlo*. Hay tres piezas:

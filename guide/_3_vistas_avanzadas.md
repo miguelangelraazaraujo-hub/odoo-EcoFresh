@@ -35,35 +35,35 @@ addons/gym_addon/
 **Bloque 1 — Nueva vista Kanban de actividades:**
 
 ```diff
-  14      </record>
-  15 
-  16 +     <!-- Vista Kanban de actividades -->
-  17 +     <record id="gym_activity_view_kanban" model="ir.ui.view">
-  18 +         <field name="name">gym.activity.kanban</field>
-  19 +         <field name="model">gym.activity</field>
-  20 +         <field name="arch" type="xml">
-  21 +             <kanban>
-  22 +                 <field name="name"/>
-  23 +                 <field name="duration"/>
-  24 +                 <field name="max_capacity"/>
-  25 +                 <templates>
-  26 +                     <t t-name="kanban-box">
-  27 +                         <div class="oe_kanban_card oe_kanban_global_click">
-  28 +                             <div class="oe_kanban_content">
-  29 +                                 <strong>
-  30 +                                     <field name="name"/>
-  31 +                                 </strong>
-  32 +                                 <div class="text-muted">
-  33 +                                     <field name="duration"/> h · max
-  34 +                                     <field name="max_capacity"/> personas
-  35 +                                 </div>
-  36 +                             </div>
-  37 +                         </div>
-  38 +                     </t>
-  39 +                 </templates>
-  40 +             </kanban>
-  41 +         </field>
-  42 +     </record>
+>    </record>
+>
+     <!-- Vista Kanban de actividades -->
+     <record id="gym_activity_view_kanban" model="ir.ui.view">
+         <field name="name">gym.activity.kanban</field>
+         <field name="model">gym.activity</field>
+         <field name="arch" type="xml">
+             <kanban>
+                 <field name="name"/>
+                 <field name="duration"/>
+                 <field name="max_capacity"/>
+                 <templates>
+                     <t t-name="kanban-box">
+                         <div class="oe_kanban_card oe_kanban_global_click">
+                             <div class="oe_kanban_content">
+                                 <strong>
+                                     <field name="name"/>
+                                 </strong>
+                                 <div class="text-muted">
+                                     <field name="duration"/> h · max
+                                     <field name="max_capacity"/> personas
+                                 </div>
+                             </div>
+                         </div>
+                     </t>
+                 </templates>
+             </kanban>
+         </field>
+     </record>
 ```
 
 > Dentro del `<kanban>` primero se declaran los campos que se van a usar (para que Odoo los cargue), y luego viene la plantilla `<t t-name="kanban-box">` que define el HTML de cada tarjeta. Las clases CSS como `oe_kanban_card` son del framework de Odoo y dan el estilo de tarjeta. `oe_kanban_global_click` hace que clicar en cualquier parte de la tarjeta abra el formulario del registro.
@@ -71,12 +71,11 @@ addons/gym_addon/
 **Bloque 2 — Acción ampliada con kanban:**
 
 ```diff
-  74      <record id="gym_activity_action" model="ir.actions.act_window">
-  75          <field name="name">Actividades</field>
-  76          <field name="res_model">gym.activity</field>
-  77 -        <field name="view_mode">tree,form</field>
-  78 +        <field name="view_mode">kanban,tree,form</field>
-  79      </record>
+>   <record id="gym_activity_action" model="ir.actions.act_window">
+>       <field name="name">Actividades</field>
+>       <field name="res_model">gym.activity</field>
+        <field name="view_mode">kanban,tree,form</field>
+>   </record>
 ```
 
 > El orden importa: el primer modo en la lista es el que se muestra por defecto al entrar en la pantalla. Al poner `kanban` primero, los usuarios verán las tarjetas al abrir "Actividades" en lugar de la tabla.
@@ -88,37 +87,37 @@ addons/gym_addon/
 **Bloque 1 — Nueva vista Kanban de horarios agrupada por día:**
 
 ```diff
-  15      </record>
-  16 
-  17 +     <!-- Kanban del horario agrupado por día -->
-  18 +     <record id="gym_schedule_view_kanban" model="ir.ui.view">
-  19 +         <field name="name">gym.schedule.kanban</field>
-  20 +         <field name="model">gym.schedule</field>
-  21 +         <field name="arch" type="xml">
-  22 +             <kanban default_group_by="day_of_week">
-  23 +                 <field name="activity_id"/>
-  24 +                 <field name="time_start"/>
-  25 +                 <field name="time_end"/>
-  26 +                 <field name="instructor"/>
-  27 +                 <templates>
-  28 +                     <t t-name="kanban-box">
-  29 +                         <div class="oe_kanban_card oe_kanban_global_click">
-  30 +                             <strong>
-  31 +                                 <field name="activity_id"/>
-  32 +                             </strong>
-  33 +                             <div class="text-muted">
-  34 +                                 <field name="time_start" widget="float_time"/> -
-  35 +                                 <field name="time_end" widget="float_time"/>
-  36 +                             </div>
-  37 +                             <div>
-  38 +                                 <field name="instructor"/>
-  39 +                             </div>
-  40 +                         </div>
-  41 +                     </t>
-  42 +                 </templates>
-  43 +             </kanban>
-  44 +         </field>
-  45 +     </record>
+>    </record>
+>
+     <!-- Kanban del horario agrupado por día -->
+     <record id="gym_schedule_view_kanban" model="ir.ui.view">
+         <field name="name">gym.schedule.kanban</field>
+         <field name="model">gym.schedule</field>
+         <field name="arch" type="xml">
+             <kanban default_group_by="day_of_week">
+                 <field name="activity_id"/>
+                 <field name="time_start"/>
+                 <field name="time_end"/>
+                 <field name="instructor"/>
+                 <templates>
+                     <t t-name="kanban-box">
+                         <div class="oe_kanban_card oe_kanban_global_click">
+                             <strong>
+                                 <field name="activity_id"/>
+                             </strong>
+                             <div class="text-muted">
+                                 <field name="time_start" widget="float_time"/> -
+                                 <field name="time_end" widget="float_time"/>
+                             </div>
+                             <div>
+                                 <field name="instructor"/>
+                             </div>
+                         </div>
+                     </t>
+                 </templates>
+             </kanban>
+         </field>
+     </record>
 ```
 
 > La clave aquí es `default_group_by="day_of_week"`: Odoo crea automáticamente una columna por cada valor del campo `Selection` (Lunes, Martes…) y coloca cada horario en su columna correspondiente. El resultado visual es una vista de semana — sin una sola línea de JavaScript.
@@ -126,12 +125,11 @@ addons/gym_addon/
 **Bloque 2 — Acción ampliada con kanban:**
 
 ```diff
-  66      <record id="gym_schedule_action" model="ir.actions.act_window">
-  67          <field name="name">Horario semanal</field>
-  68          <field name="res_model">gym.schedule</field>
-  69 -        <field name="view_mode">tree,form</field>
-  70 +        <field name="view_mode">kanban,tree,form</field>
-  71      </record>
+>   <record id="gym_schedule_action" model="ir.actions.act_window">
+>       <field name="name">Horario semanal</field>
+>       <field name="res_model">gym.schedule</field>
+        <field name="view_mode">kanban,tree,form</field>
+>   </record>
 ```
 
 ---
@@ -139,8 +137,7 @@ addons/gym_addon/
 ### `addons/gym_addon/__manifest__.py` — 🟡 MODIFICADO
 
 ```diff
-  2 -    'version': '17.0.2.0.0',
-  3 +    'version': '17.0.3.0.0',
+    'version': '17.0.3.0.0',
 ```
 
 > Bump de versión para que Odoo detecte que hay cambios al actualizar el módulo.
