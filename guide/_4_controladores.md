@@ -163,8 +163,8 @@ class GymPortalController(http.Controller):
 ### `addons/gym_addon/__init__.py` — 🟡 MODIFICADO
 
 ```diff
-  1   from . import models
-  2 + from . import controllers
+from . import models
+from . import controllers
 ```
 
 > Se registra el nuevo paquete `controllers` para que Python lo cargue al arrancar el addon.
@@ -174,17 +174,13 @@ class GymPortalController(http.Controller):
 ### `addons/gym_addon/__manifest__.py` — 🟡 MODIFICADO
 
 ```diff
-  8 -    'depends': ['base'],
-  9 +    'depends': ['base', 'portal', 'website'],
- 10 
- 11      'data': [
- 12          'security/ir.model.access.csv',
- 13          'views/gym_activity_views.xml',
- 14          'views/gym_schedule_views.xml',
- 15 +        'templates/portal_schedule.xml',
- 16      ],
- 17 -    'version': '17.0.3.0.0',
- 18 +    'version': '17.0.4.0.0',
+   'depends': ['base', 'portal', 'website'],
+   'data': [
+       'security/ir.model.access.csv',
+       'views/gym_activity_views.xml',
+       'views/gym_schedule_views.xml',
+       'templates/portal_schedule.xml',
+    ],
 ```
 
 > Se añaden dos nuevas dependencias: `portal` (gestión de usuarios públicos) y `website` (el CMS de Odoo que proporciona el layout web, el enrutador HTTP y Bootstrap). Sin ellas, `t-call="website.layout"` y `auth='public'` no estarían disponibles.

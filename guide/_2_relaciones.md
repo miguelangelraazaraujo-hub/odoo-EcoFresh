@@ -158,6 +158,7 @@ from . import gym_schedule
             </form>
         </field>
     </record>
+    
     <record id="gym_schedule_action" model="ir.actions.act_window">
         <field name="name">Horario semanal</field>
          <field name="res_model">gym.schedule</field>
