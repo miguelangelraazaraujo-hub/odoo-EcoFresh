@@ -100,54 +100,54 @@ class GymPortalController(http.Controller):
 ### `addons/gym_addon/templates/portal_schedule.xml` — 🟢 NUEVO
 
 ```diff
-  1 + <?xml version="1.0" encoding="utf-8"?>
-  2 + <odoo>
-  3 + 
-  4 +     <template id="portal_schedule_public" name="Horario Semanal Público">
-  5 +         <t t-call="website.layout">
-  6 +             <div class="container mt-4">
-  7 + 
-  8 +                 <h1 class="mb-4">Horario Semanal</h1>
-  9 + 
-  10 +                 <t t-foreach="days_order" t-as="day">
-  11 +                     <t t-if="schedule_by_day.get(day)">
-  12 +                         <h3 class="mt-4">
-  13 +                             <t t-esc="day"/>
-  14 +                         </h3>
-  15 +                         <table class="table table-bordered table-hover">
-  16 +                             <thead class="table-dark">
-  17 +                                 <tr>
-  18 +                                     <th>Actividad</th>
-  19 +                                     <th>Inicio</th>
-  20 +                                     <th>Fin</th>
-  21 +                                     <th>Monitor/a</th>
-  22 +                                     <th>Plazas</th>
-  23 +                                 </tr>
-  24 +                             </thead>
-  25 +                             <tbody>
-  26 +                                 <t t-foreach="schedule_by_day[day]" t-as="slot">
-  27 +                                     <tr>
-  28 +                                         <td><t t-esc="slot.activity_id.name"/></td>
-  29 +                                         <td><t t-esc="'%02d:%02d' % (int(slot.time_start), int((slot.time_start % 1) * 60))"/></td>
-  30 +                                         <td><t t-esc="'%02d:%02d' % (int(slot.time_end),   int((slot.time_end   % 1) * 60))"/></td>
-  31 +                                         <td><t t-esc="slot.instructor or '-'"/></td>
-  32 +                                         <td><t t-esc="slot.activity_id.max_capacity"/></td>
-  33 +                                     </tr>
-  34 +                                 </t>
-  35 +                             </tbody>
-  36 +                         </table>
-  37 +                     </t>
-  38 +                 </t>
-  39 + 
-  40 +                 <p t-if="not schedule_by_day" class="text-muted">
-  41 +                     No hay actividades programadas esta semana.
-  42 +                 </p>
-  43 + 
-  44 +             </div>
-  45 +         </t>
-  46 +     </template>
-  47 + 
-  48 + </odoo>
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+     <template id="portal_schedule_public" name="Horario Semanal Público">
+        <t t-call="website.layout">
+             <div class="container mt-4">
+
+                <h1 class="mb-4">Horario Semanal</h1>
+
+                 <t t-foreach="days_order" t-as="day">
+                     <t t-if="schedule_by_day.get(day)">
+                         <h3 class="mt-4">
+                             <t t-esc="day"/>
+                         </h3>
+                         <table class="table table-bordered table-hover">
+                             <thead class="table-dark">
+                                 <tr>
+                                     <th>Actividad</th>
+                                     <th>Inicio</th>
+                                     <th>Fin</th>
+                                     <th>Monitor/a</th>
+                                     <th>Plazas</th>
+                                 </tr>
+                             </thead>
+                             <tbody>
+                                 <t t-foreach="schedule_by_day[day]" t-as="slot">
+                                     <tr>
+                                         <td><t t-esc="slot.activity_id.name"/></td>
+                                         <td><t t-esc="'%02d:%02d' % (int(slot.time_start), int((slot.time_start % 1) * 60))"/></td>
+                                         <td><t t-esc="'%02d:%02d' % (int(slot.time_end),   int((slot.time_end   % 1) * 60))"/></td>
+                                         <td><t t-esc="slot.instructor or '-'"/></td>
+                                         <td><t t-esc="slot.activity_id.max_capacity"/></td>
+                                     </tr>
+                                 </t>
+                             </tbody>
+                         </table>
+                     </t>
+                 </t>
+ 
+                 <p t-if="not schedule_by_day" class="text-muted">
+                     No hay actividades programadas esta semana.
+                 </p>
+ 
+             </div>
+         </t>
+     </template>
+ 
+</odoo>
 ```
 
 > Esta plantilla usa **QWeb**, el motor de plantillas de Odoo. Si conoces Thymeleaf, Jinja2 o Handlebars, la sintaxis es muy similar. Las directivas clave son:
