@@ -100,12 +100,12 @@ class GymSchedule(models.Model):
 >       default=True,
 >   )
 
-     # Relación inversa: desde la actividad vemos todos sus horarios
-     schedule_ids = fields.One2many(
-         comodel_name='gym.schedule',
-         inverse_name='activity_id',
-         string='Horarios',
-     )
+    # Relación inversa: desde la actividad vemos todos sus horarios
+    schedule_ids = fields.One2many(
+        comodel_name='gym.schedule',
+        inverse_name='activity_id',
+        string='Horarios',
+    )
 ```
 
 > Este campo **no crea ninguna columna nueva** en la tabla `gym_activity`. Es puramente una declaración que le dice a Odoo: *"cuando alguien pida los horarios de esta actividad, busca en `gym_schedule` todos los registros donde `activity_id` apunte a mí"*. Es exactamente lo que haría un `SELECT * FROM gym_schedule WHERE activity_id = ?` en SQL. La convención `_ids` (plural) indica que devuelve una colección.
@@ -196,7 +196,7 @@ from . import gym_schedule
                  </field>
              </page>
          </notebook>
-         </sheet>
+>   </sheet>
 ```
 
 > `<notebook>` genera pestañas dentro del formulario. `editable="bottom"` permite editar la tabla de horarios directamente en la línea, sin abrir un popup, añadiendo filas nuevas al final. Es el patrón "master-detail" clásico: ficha principal (actividad) con tabla de detalle (horarios) integrada.
