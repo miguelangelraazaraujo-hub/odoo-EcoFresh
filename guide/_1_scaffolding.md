@@ -37,6 +37,13 @@ odoo_intro/
 
 ---
 
+## Esquema de modelos de datos
+
+Se parte de un sencillo de actividades y horarios semanales para estas actividades.
+
+![Esquema inicial del modelo de datos](./resources/initial-schema.png)
+
+
 ## 🗂️ Archivos afectados
 
 ### `docker-compose.yml` — 🟢 NUEVO
@@ -113,6 +120,20 @@ from . import models
 > En Python, para que una carpeta sea un "paquete importable", necesita un `__init__.py`. Este le dice al intérprete: *"cuando alguien importe este paquete, carga también la subcarpeta `models`"*. Equivalente a un `index.js` en Node.
 
 ---
+
+## ⚠️ Comprobación que Odoo ya carga el módulo
+
+Reinicia el container de nuevo para refrescar las aplicaciones y ver si gym aparece entre las aplicaciones de Odoo.
+
+Desde la terminal baja y vueve a subir el container, y luego accede desde el navegador a la pantalla de aplicaciones de Odoo y busca por "gym".
+Luego pulse 'Activar'. No aparecerá nada porque sólo hemos preparado el manifest. 
+Al terminar este paso volvemos a repetir la operación. Entonces debe aparecer el gimnasio en el menú lateral y las vistas de actividades.
+
+```
+> docker compose down
+> docker compose up -d
+```
+
 
 ### `addons/gym_addon/models/__init__.py` — 🟢 NUEVO
 
