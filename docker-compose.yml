@@ -1,7 +1,7 @@
 services:
   web:
     image: odoo:17.0
-    command: odoo --log-level=debug --country=es
+    command: odoo --log-level=debug
     depends_on:
       - db
     ports:
