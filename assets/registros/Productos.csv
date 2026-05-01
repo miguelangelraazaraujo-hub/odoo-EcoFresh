@@ -1,0 +1,16 @@
+default_code,name,type,categ_id,list_price,standard_price,uom_id,uom_po_id,sale_ok,purchase_ok
+P001,Naranjas ecológicas,product,Fruta,2.50,1.20,kg,kg,TRUE,TRUE
+P002,Plátanos ecológicos,product,Fruta,2.20,1.10,kg,kg,TRUE,TRUE
+P003,Manzanas ecológicas,product,Fruta,2.80,1.40,kg,kg,TRUE,TRUE
+P004,Zanahorias ecológicas,product,Verdura,1.90,0.90,kg,kg,TRUE,TRUE
+P005,Tomates ecológicos,product,Verdura,3.00,1.50,kg,kg,TRUE,TRUE
+P006,Zumo de naranja natural,product,Bebida,4.50,2.00,Unidades,Unidades,TRUE,FALSE
+P007,Mermelada de fresa ecológica,product,Elaborado,5.00,2.50,Unidades,Unidades,TRUE,FALSE
+P008,Cesta ecológica básica,consu,Servicio,15.00,8.00,Unidades,Unidades,TRUE,FALSE
+P009,Cesta ecológica premium,consu,Servicio,25.00,14.00,Unidades,Unidades,TRUE,FALSE
+P010,Botella vidrio 1L,product,Material,0.00,0.50,Unidades,Unidades,FALSE,TRUE
+P011,Caja de cartón,product,Material,0.00,0.30,Unidades,Unidades,FALSE,TRUE
+P012,Fresas ecológicas,product,Fruta,3.50,1.80,kg,kg,TRUE,TRUE
+P013,Lechuga ecológica,product,Verdura,1.50,0.70,Unidades,Unidades,TRUE,TRUE
+P014,Papas ecológicas,product,Verdura,2.00,1.00,kg,kg,TRUE,TRUE
+P015,Calabacines ecológicos,product,Verdura,2.30,1.10,kg,kg,TRUE,TRUE

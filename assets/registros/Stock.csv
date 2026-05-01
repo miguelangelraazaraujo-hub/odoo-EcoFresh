@@ -1,0 +1,14 @@
+product_id,location_id,inventory_quantity
+P001,WH/Stock,150
+P002,WH/Stock,200
+P003,WH/Stock,120
+P004,WH/Stock,100
+P005,WH/Stock,130
+P006,WH/Stock,80
+P007,WH/Stock,60
+P010,WH/Stock,300
+P011,WH/Stock,500
+P012,WH/Stock,90
+P013,WH/Stock,110
+P014,WH/Stock,180
+P015,WH/Stock,95
